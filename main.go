@@ -11,5 +11,5 @@ var number_of_rides int
 var balance float64
 
 func main() {
-  fmt.Printf("%v ride cost\n", ride_cost)
+  fmt.Printf("%v ride cost\n" )
 }

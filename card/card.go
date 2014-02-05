@@ -46,9 +46,13 @@ func(c card) Calculate() (int, int) {
   value_to_add := 0
   for i := 0; math.Mod(float64(c.value), float64(ride_cost)) != 0; i += min_increment {
     c.value = initial_value
+
     fmt.Printf("Starting Card value %v\n", c.value)
     fmt.Printf("Adding %v, adjusted to %v\n", i, valueWithBonus(i))
+
     c.RefillCard(i)
+    value_to_add = i
+
     fmt.Printf("New Card value is %v\n", c.value)
     fmt.Printf("Mod %v\n", math.Mod(float64(c.value), float64(ride_cost)))
     fmt.Printf("=====================\n")

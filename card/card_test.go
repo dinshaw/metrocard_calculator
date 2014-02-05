@@ -31,7 +31,7 @@ func TestRefill(t *testing.T) {
 func TestCalculate(t *testing.T) {
 	card := ExistingCard(value)
 	value_to_add, _ := card.Calculate()
-	if value_to_add != 12 {
+	if value_to_add != 905 {
 		t.Error("Expected value_to_add to be 11, but got", value_to_add)
 	}
 }

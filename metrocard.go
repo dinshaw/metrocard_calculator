@@ -3,13 +3,14 @@ package main
 import (
 	"fmt"
 )
+var ride_cost float64 = 1.50
 
 func main() {
-	// How much left or your card?
-	card := kiosk.NewCard(starting_balance)
-	for i := 0.01; Mod(card.Value, ride_cost) == 0; i++ {
-
-	}
-	// If you add $xx you will have a zero balance after yy rides.
-	fmt.Printf("%v ride cost\n")
+	card := metrocard.ExistingCard(starting_balance)
+  card.Calculate
+	fmt.Printf(
+    "If you add $%v you will have a zero balance after %v rides.\n"
+    card.AmountToAdd,
+    card.RidesRemaining
+  )
 }

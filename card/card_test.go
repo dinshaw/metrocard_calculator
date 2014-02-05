@@ -4,19 +4,34 @@ import (
 	"testing"
 )
 
-var value float64 = 20.00
+var value int = 1000
 
-func TestNew(t *testing.T) {
-	card := Card.New(value)
-	if card.Value != (value + (value * 0.5)) {
-		t.Error("Expected card to have a value of", (value + (value * 0.5)), "got", card.Value)
+func TestNewCard(t *testing.T) {
+	card := NewCard(value)
+	if card.Value() != 1050 {
+		t.Error("Expected card to have a value of 1050, but got", card.Value())
+	}
+}
+
+func TestExistingCard(t *testing.T) {
+	card := ExistingCard(value)
+	if card.Value() != value {
+		t.Error("Expected card to have a value of 1000, but got", card.Value())
 	}
 }
 
 func TestRefill(t *testing.T) {
-	card := Card{Value: value}
-	card.Refill(value)
-	if card.Value != (value * 2) {
-		t.Error("Expected card to have a value of", (value * 2), "got", card.Value)
+	card := ExistingCard(value)
+	card.RefillCard(value)
+	if card.Value() != 2050 {
+		t.Error("Expected card to have a value of 2050, but got", card.Value())
+	}
+}
+
+func TestCalculate(t *testing.T) {
+	card := ExistingCard(value)
+	value_to_add, _ := card.Calculate()
+	if value_to_add != 12 {
+		t.Error("Expected value_to_add to be 11, but got", value_to_add)
 	}
 }

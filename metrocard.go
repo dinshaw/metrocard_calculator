@@ -4,37 +4,18 @@ import (
 	"flag"
 	"fmt"
 	"github.com/dinshaw/metrocard/card"
-	"log"
-	"strconv"
+	money "github.com/dinshaw/metrocard/money"
 )
 
-type money int
-
-func (m *money) String() string {
-	// return fmt.Sprintf("$%.2d", *m)
-	return "aoeu"
-}
-
-func (m *money) Set(value string) error {
-	float, err := strconv.ParseFloat(value, 1)
-	if err != nil {
-		log.Fatal(err)
-	}
-	*m = money(float * 100)
-	return nil
-}
-
-var moneyFlag money
-var value_to_add money
+var existing money.Money
 
 func init() {
-	flag.Var(&moneyFlag, "existing", "How much is currently on your Metrocard")
+	flag.Var(&existing, "existing", "How much is currently on your Metrocard")
 }
 
 func main() {
 	flag.Parse()
-	c := metrocard.ExistingCard(int(moneyFlag))
+	c := metrocard.ExistingCard(existing)
 	value_to_add, rides_remaining := c.Calculate()
-	fmt.Printf("If you add %v you will have a zero balance after %v rides.\n", money(value_to_add), rides_remaining)
-
+	fmt.Printf("If you add %6.2d you will have a zero balance after %v rides.\n", value_to_add, rides_remaining)
 }

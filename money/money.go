@@ -13,11 +13,19 @@ func (m *Money) String() string {
 }
 
 func (m *Money) Set(value string) error {
+	switch t := value.(type) {
+	case string:
+		float, err := strconv.ParseFloat(value, 64)
+		*m = Money(float * 100)
+		// case float64:
+		// 	*m = Money(value * 100)
+		// case int:
+		// 	*m = Money(value)
+	}
 
-	float, err := strconv.ParseFloat(value, 64)
 	if err != nil {
 		log.Fatal(err)
 	}
-	*m = Money(float * 100)
+
 	return nil
 }
